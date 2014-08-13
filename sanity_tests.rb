@@ -14,8 +14,6 @@ require 'watir-webdriver'
 
 @b = Watir::Browser.new :ff
 
-@b.goto 'http://www.caringbridge.dev/search?q=Vagrant' 
-
 print "Does http://www.caringbridge.dev/ resolve? \n"
 @b.goto 'http://www.caringbridge.dev'
 
