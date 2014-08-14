@@ -1,6 +1,6 @@
 # X Does http://www.caringbridge.dev/ resolve?
 # X Can you create an account?
-# Did you receive the welcome emails after creating your account?
+# X Did you receive the welcome emails after creating your account?
 # X Can you create a site 
 # X Can you search for your site?
 # Can you add a journal with a photo?
