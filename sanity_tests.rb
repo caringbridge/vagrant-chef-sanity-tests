@@ -26,14 +26,25 @@ end
 print "Can you create an account? \n"
 @b.goto 'https://www.caringbridge.dev/signup'
 
+testUserEmail = 'cbvagrantchef' + Time.now.to_i.to_s
+
 @b.text_field(:name => 'firstName').set 'Vagrant'
 @b.text_field(:name => 'lastName').set 'Chef'
-@b.text_field(:name => 'email').set 'cbwandersen+vagrantchef' + Time.now.to_i.to_s + '@gmail.com'
+@b.text_field(:name => 'email').set testUserEmail + '@mailinator.com'
 @b.text_field(:name => 'password').set '123456'
 @b.checkbox(:name => 'terms', :value => '1').set
 @b.button(:name => 'submit-btn').click
 
 if @b.span(:class => 'user-generated global-profile-firstname').when_present.text == 'Vagrant'
+		print "Test passed!\n"
+else
+		print "Test failed!\n"
+end
+
+print "Did you receive a welcome email? \n"
+@b.goto 'http://mailinator.com/inbox.jsp?to=' + testUserEmail
+
+if @b.div(:class => 'from ng-binding').when_present.text == 'CaringBridge'
 		print "Test passed!\n"
 else
 		print "Test failed!\n"
