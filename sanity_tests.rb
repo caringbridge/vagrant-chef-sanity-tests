@@ -44,10 +44,11 @@ end
 print "Did you receive a welcome email? \n"
 @b.goto 'http://mailinator.com/inbox.jsp?to=' + testUserEmail
 
-if @b.div(:class => 'from ng-binding').when_present.text == 'CaringBridge'
-		print "Test passed!\n"
+if @b.div(:id => 'noemailmsg').exists?
+		print "Test failed!\n" +
+		"Emails can take up to 5 minutes to send. Consider waiting and rechecking inbox: http://mailinator.com/inbox.jsp?to=" + testUserEmail 
 else
-		print "Test failed!\n"
+		print "Test passed!\n"
 end
 
 print "Can you start a site? \n"
@@ -79,7 +80,9 @@ print "Can you search for your site? \n"
 if @b.text.include? 'Is one of these the Site or SupportPlanner you are looking for?'
 		print "Test passed!\n"
 else
-		print "Test failed!\n"
+		print "Test failed!\n" +
+		"Try running manually on Vagrant: sudo env APPLICATION_ENV=vagrant /opt/platform/scripts/cb search heartbeat\n" +
+		"Still not working? vagrant destroy && vagrant up \n"
 end
 
 # Wrap up
