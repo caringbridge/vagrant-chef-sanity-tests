@@ -78,7 +78,7 @@ puts "site_name_id: #{site_name_id}"
 puts "Does #{test_url} resolve?"
 @b.goto "#{test_url}"
 
-verify("#{test_url} resolves", (@b.div(:id => 'dev-performance').when_present.text.include? "[DEV:Host centos6.caringbridge.dev]"))
+verify("#{test_url} resolves", (@b.div(:class => 'global-profile navbar-right').when_present.text.include? "Log In or Sign Up"))
 
 
 puts "Can you create an account?"
@@ -90,7 +90,7 @@ puts "Can you create an account?"
 @b.checkbox(:name => 'terms', :value => '1').set
 @b.button(:name => 'submit-btn').click
 
-verify("Create an account", (@b.span(:class => 'user-generated global-profile-firstname').when_present.text == 'Vagrant'))
+verify("Create an account", (@b.div(:class => 'global-profile navbar-right').when_present.text.include? "Vagrant’s Home"))
 
 
 # Did user receive a welcome email?
@@ -113,8 +113,7 @@ end
 @b.button(:name => 'submit-btn').click
 
 
-# @todo: Defaults to v3, when it defaults to v5 we can update this...
-verify("Start a site", (@b.span(:class => 'user-generated global-profile-firstname').when_present.text == 'Vagrant'))
+verify("Start a site", (@b.div(:class => 'site-header-banner-inner').when_present.text == 'Vagrant Chef'))
 
 # Fix inexplicable browser hang
 # @todo: Fix inexplicable browser hang 
